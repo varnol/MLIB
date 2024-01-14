@@ -9,10 +9,10 @@ public class Rat : MonoBehaviour
 		Debug.Log("Rat awaked");
 	}
 
-	private void Start()
-	{
-		Debug.Log("Rat started");
-	}
+	//private void Start()
+	//{
+	//	Debug.Log("Rat started");
+	//}
 
     //private void Update()
     //{
@@ -29,10 +29,10 @@ public class Rat : MonoBehaviour
     // 	Debug.Log("Rat monster late updated");
     // }
 
-    private void OnEnable()
-    {
-        Debug.Log("Rat monster enabled");
-    }
+    //private void OnEnable()
+    //{
+    //    Debug.Log("Rat monster enabled");
+    //}
 
     // private void OnDisable()
     // {
@@ -43,4 +43,9 @@ public class Rat : MonoBehaviour
 	{
 		Debug.Log("Rat destroyed");
 	}
+
+    public void SetGame(Game value)
+    {
+        value.Register(gameObject);
+    }
 }
