@@ -13,18 +13,18 @@ private readonly List<GameObject> _objectsToDestroy = new();
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            //Debug.Log("111");
-            Rat rat = FindObjectOfType<Rat>();
-            if (rat != null)
+            if (_objectsToDestroy.Count > 0)
             {
-                Destroy(rat.gameObject);
+                Destroy(_objectsToDestroy[0]);
+                _objectsToDestroy.RemoveAt(index:0);
             }
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             var go = Instantiate(_objectToInstantiate);
-            var component = go.GetComponent<Rat>();
+            var component = go.GetComponent<Captain>();
             if (component != null)
             {
                 component.SetGame(this);
