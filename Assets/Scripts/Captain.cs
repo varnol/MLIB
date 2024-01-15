@@ -5,7 +5,9 @@ using UnityEngine;
 public class Captain : MonoBehaviour
 {
     public float _movementSpeed;
-	private void Awake()
+    public float _rotationSpeed;
+
+    private void Awake()
 	{
 		Debug.Log("Cap awaked");
     }
@@ -13,31 +15,26 @@ public class Captain : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log("Cap awaked");
-            Vector3 tmp = transform.position;
-            tmp.z +=_movementSpeed;
-            transform.position = tmp;
+            transform.Translate(translation: Vector3.forward * _movementSpeed);
+            //Vector3 tmp = transform.position;
+            //tmp.z +=_movementSpeed;
+            //transform.position = tmp;
 
         }
+
         if (Input.GetKey(KeyCode.S))
         {
-            Vector3 tmp = transform.position;
-            tmp.z -= _movementSpeed;
-            transform.position = tmp;
+            transform.Translate(translation: Vector3.back * _movementSpeed);
 
         }
         if (Input.GetKey(KeyCode.A))
         {
-            Vector3 tmp = transform.position;
-            tmp.x += _movementSpeed;
-            transform.position = tmp;
-
+            transform.Rotate(Vector3.up, -_rotationSpeed);
         }
+
         if (Input.GetKey(KeyCode.D))
         {
-            Vector3 tmp = transform.position;
-            tmp.x -= _movementSpeed;
-            transform.position = tmp;
+            transform.Rotate(Vector3.up, _rotationSpeed);
 
         }
     }
@@ -73,7 +70,7 @@ private void OnDestroy()
 	{
 		Debug.Log("Cap destroyed");
 	}
-
+//Registering self in Game List
     public void SetGame(Game value)
     {
         value.Register(gameObject);

@@ -5,9 +5,10 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public GameObject _objectToInstantiate;
+    public Transform _capSpawnPoint;
 
+//creating the array of objects
 private readonly List<GameObject> _objectsToDestroy = new();
-
 
     private void Update()
     {
@@ -23,7 +24,7 @@ private readonly List<GameObject> _objectsToDestroy = new();
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            var go = Instantiate(_objectToInstantiate);
+            var go = Instantiate(_objectToInstantiate,_capSpawnPoint.position, _capSpawnPoint.rotation);
             var component = go.GetComponent<Captain>();
             if (component != null)
             {
@@ -32,6 +33,8 @@ private readonly List<GameObject> _objectsToDestroy = new();
 
         }
     }
+
+    //registering objects in array
     public void Register(GameObject objectToDestroy)
     {
         _objectsToDestroy.Add(objectToDestroy);
