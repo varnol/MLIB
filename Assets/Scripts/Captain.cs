@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class Captain : MonoBehaviour
 {
-    public float _movementSpeed;
-    public float _rotationSpeed;
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _jumpSpeed;
+    [SerializeField] private ratSpawner _ratSpawner;
+    public Rigidbody _rb;
+    public int _jump;
 
-    private void Awake()
+    public void Awake()
 	{
-		Debug.Log("Cap awaked");
+        _jump = 0;
+        //Debug.Log(_jump);
     }
-    private void Update()
+
+    private void Start()
+    {
+    _rb = GetComponent<Rigidbody>();
+    }
+    public void Update()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -37,36 +47,24 @@ public class Captain : MonoBehaviour
             transform.Rotate(Vector3.up, _rotationSpeed);
 
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Debug.Log(_jump);
+            Debug.Log("_jump");
+            if
+                (_jump==0)
+
+            {
+                _rb.AddForce(Vector3.up * _jumpSpeed);
+                _jump ++;
+            }
+        }
+
     }
+   
 
-//private void Start()
-//{
-//	Debug.Log("Cap started");
-//}
-
-
-//
-// private void FixedUpdate()
-// {
-// 	Debug.Log("Cap  fixed updated");
-// }
-//
-// private void LateUpdate()
-// {
-// 	Debug.Log("Caplate updated");
-// }
-
-//private void OnEnable()
-//{
-//    Debug.Log("Cap enabled");
-//}
-
-// private void OnDisable()
-// {
-// 	Debug.Log("Cap disabled");
-// }
-
-private void OnDestroy()
+    private void OnDestroy()
 	{
 		Debug.Log("Cap destroyed");
 	}
@@ -74,5 +72,11 @@ private void OnDestroy()
     public void SetGame(Game value)
     {
         value.Register(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //Debug.Log(message: $"Capt collision enter{other.gameObject.name}");
+        _ratSpawner.spawn(); 
     }
 }
