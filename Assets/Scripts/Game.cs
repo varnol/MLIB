@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
 //creating the array of objects
 private readonly List<GameObject> _objectsToDestroy = new();
 
-    private void Update()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -29,6 +29,7 @@ private readonly List<GameObject> _objectsToDestroy = new();
             if (component != null)
             {
                 component.SetGame(this);
+                //component.SetSpawner(_ratSpawner);
             }
 
         }

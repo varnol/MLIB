@@ -8,15 +8,15 @@ public class ratSpawner : MonoBehaviour
     public GameObject _enemyPrefab;
     public Transform[] _spawnPoints;
 
-    private float _currentTimer;
+    public float _currentTimer;
 
-    private void Start()
+    public void Start()
     {
         ResetTimer();
     }
 
    
-    private void Update()
+    public void Update()
     {
        
         //_currentTimer -= Time.deltaTime;
@@ -29,13 +29,13 @@ public class ratSpawner : MonoBehaviour
         //}
     }
 
-    private void ResetTimer()
+    public void ResetTimer()
     {
         _currentTimer = _timeToSpawn;
     }
     public void spawn()
     {
-            int index = Random.Range(0, _spawnPoints.Length);
+    int index = Random.Range(0, _spawnPoints.Length);
     Instantiate(_enemyPrefab, _spawnPoints[index].position, _spawnPoints[index].rotation);
     
 }

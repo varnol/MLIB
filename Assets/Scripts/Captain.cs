@@ -7,9 +7,10 @@ public class Captain : MonoBehaviour
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _jumpSpeed;
-    [SerializeField] private ratSpawner _ratSpawner;
+    public ratSpawner _ratSpawner;
     public Rigidbody _rb;
     public int _jump;
+    public int _score;
 
     public void Awake()
 	{
@@ -50,12 +51,11 @@ public class Captain : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log(_jump);
-            Debug.Log("_jump");
+            
             if
                 (_jump==0)
 
-            {
+            {Debug.Log(_jump);
                 _rb.AddForce(Vector3.up * _jumpSpeed);
                 _jump ++;
             }
@@ -68,15 +68,58 @@ public class Captain : MonoBehaviour
 	{
 		Debug.Log("Cap destroyed");
 	}
+
+
+    //captain gets spawner method
+    public void SetSpawner(ratSpawner spawner)
+    {
+        _ratSpawner = spawner;
+    }
 //Registering self in Game List
     public void SetGame(Game value)
     {
         value.Register(gameObject);
     }
 
-    private void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(message: $"Capt collision enter{other.gameObject.name}");
+        Debug.Log(message: $"Capt collision enter{other.gameObject.name}");
         _ratSpawner.spawn(); 
     }
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    Rat component = other.gameObject.GetComponent<Rat>();
+    //    if (component != null)
+    //    {
+    //        Destroy(other.gameObject);
+    //        _score++;
+    //        Debug.Log(message: _score);
+
+    //    }
+
+    //    Ship component2 = other.gameObject.GetComponent<Ship>();
+    //    if (component != null)
+    //    {
+    //        _jump = 0;
+    //        Debug.Log(message: "perviy");
+
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<Rat>() != null)
+        {
+            Destroy(other.gameObject);
+                   _score++;
+                   Debug.Log(message: _score);
+        }
+
+        if(other.gameObject.GetComponent<Ship>() != null)
+        {
+            _jump = 0;
+            Debug.Log(message: "perviy");
+        }
+    }
+
 }
